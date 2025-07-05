@@ -7,9 +7,13 @@ const app: Application = express();
 
 // all routes
 app.use(express.json());
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "live-deploy-url"],
+    origin: [
+      process.env.CORS_ORIGIN_LOCAL || "http://localhost:5173",
+      process.env.CORS_ORIGIN_SERVER || "https://your-deployed-site.vercel.app",
+    ],
   })
 );
 
