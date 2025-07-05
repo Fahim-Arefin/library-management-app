@@ -61,7 +61,7 @@ export const getAllBooks = async (
     const {
       filter,
       sortBy = "createdAt",
-      sort = "asc",
+      sort = "desc",
       limit = "10",
     } = req.query;
 
@@ -72,9 +72,10 @@ export const getAllBooks = async (
 
     const sortOrder = sort === "desc" ? -1 : 1;
 
-    const books = await Book.find(query)
-      .sort({ [sortBy as string]: sortOrder })
-      .limit(parseInt(limit as string, 10));
+    const books = await Book.find(query).sort({
+      [sortBy as string]: sortOrder,
+    });
+    // .limit(parseInt(limit as string, 10));
 
     res.json({
       success: true,

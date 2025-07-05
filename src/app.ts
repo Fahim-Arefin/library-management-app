@@ -2,11 +2,16 @@ import express, { Application, Request, Response } from "express";
 import bookRouter from "./app/routes/book-routes";
 import { errorHandler } from "./app/middleware/error-handler";
 import borrowRouter from "./app/routes/borrow-routes";
-
+import cors from "cors";
 const app: Application = express();
 
 // all routes
 app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "live-deploy-url"],
+  })
+);
 
 app.use("/api/books", bookRouter);
 app.use("/api/borrow", borrowRouter);
